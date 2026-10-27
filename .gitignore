@@ -2,6 +2,7 @@
 data/*
 node_modules
 /wrangler.toml
+/deploy/worker/worker-secrets.json
 .DS_Store
 
 *.sqlite
@@ -10,3 +11,4 @@ node_modules
 .kiro/
 .vscode/
 .claude/
+.agents/

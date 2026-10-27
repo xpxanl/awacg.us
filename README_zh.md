@@ -1,219 +1,202 @@
 <div align="center">
-    <a href="https://github.com/MarSeventh/CloudFlare-ImgBed"><img width="80%" alt="logo" src="readme/banner.png" /></a>
-    <p><em>🗂️开源文件托管解决方案，支持 Docker 和无服务器部署，支持 Telegram、Discord、Cloudflare R2、S3、Huggingface、WebDAV 等多种存储渠道，提供 RESTful APIs 和 WebDAV 支持</em></p>
+    <a href="https://github.com/MarSeventh/CloudFlare-ImgBed">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="readme/animated-banner-dark.apng" />
+            <source media="(prefers-color-scheme: light)" srcset="readme/animated-banner-light.apng" />
+            <img width="80%" alt="CloudFlare ImgBed 动画 Logo" src="readme/animated-banner-light.apng" />
+        </picture>
+    </a>
+    <p><em>🗂️ 打破图床边界，构建你的专属开源文件托管引擎。</em></p>
     <p>
-        <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README_zh.md">简体中文</a> | <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README.md">English</a> | <a href="https://cfbed.sanyue.de">官方网站</a>
+        <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README_zh.md">简体中文</a> &nbsp;·&nbsp; <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README.md">English</a> &nbsp;·&nbsp; <a href="https://cfbed.sanyue.de">官方网站</a> &nbsp;·&nbsp; <a href="https://t.me/sanyue_club">Telegram 频道</a> &nbsp;·&nbsp; <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/discussions/categories/announcements">公告</a>
     </p>
     <p align="center">
         <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/LICENSE"><img src="https://img.shields.io/github/license/MarSeventh/CloudFlare-ImgBed" alt="License" /></a>
         <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/releases"><img src="https://img.shields.io/github/release/MarSeventh/CloudFlare-ImgBed" alt="latest version" /></a>
-        <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/releases"><img src="https://img.shields.io/github/downloads/MarSeventh/CloudFlare-ImgBed/total?color=%239F7AEA&logo=github" alt="Downloads" /></a>
         <a href="https://hub.docker.com/r/marseventh/cloudflare-imgbed"><img src="https://img.shields.io/docker/pulls/marseventh/cloudflare-imgbed" alt="Docker Pulls" /></a>
         <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/stargazers"><img src="https://img.shields.io/github/stars/MarSeventh/CloudFlare-ImgBed" alt="Stars" /></a>
         <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/network/members"><img src="https://img.shields.io/github/forks/MarSeventh/CloudFlare-ImgBed" alt="Forks" /></a>
-        <a href="https://atomgit.com/MarSeventh/CloudFlare-ImgBed"><img src="https://atomgit.com/MarSeventh/CloudFlare-ImgBed/star/badge.svg" alt="G-star" /></a>
+        <a href="https://t.me/sanyue_club"><img src="https://img.shields.io/badge/-Sanyue-26A5E4?logo=telegram&logoColor=white" alt="Telegram Sanyue" /></a>
     </p>
     <p align="center">
         <a href="https://trendshift.io/repositories/14324" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14324" alt="GitHub Trending" width="250" /></a>
+        <a href="https://atomgit.com/MarSeventh/CloudFlare-ImgBed" target="_blank"><img src="https://atomgit.com/MarSeventh/CloudFlare-Imgbed/star/new_badge.svg" alt="G-star" width="250" /></a>
         <a href="https://hellogithub.com/repository/MarSeventh/CloudFlare-ImgBed" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=71d65ace215945b0909d4c75c31b9fcb&claim_uid=6DsuqF4hInJWerv&theme=neutral" alt="Featured｜HelloGitHub" width="250" /></a>
     </p>
 </div>
 
-
-
-
-
-
 ---
 
-> [!IMPORTANT]
->
-> **v2.0 版本升级注意事项请查看公告！**
+# 1. 💡 项目介绍
 
+CloudFlare ImgBed 是支持 Docker 与 Serverless 部署的自建图床和文件托管方案，可将 **Telegram**、**Discord**、**Cloudflare R2**、**S3 兼容存储**、**Hugging Face**、**WebDAV** 等渠道统一接入一个管理界面。项目提供文件管理、身份认证、目录组织、内容审核、RESTful API 与 WebDAV，同时也在不断增加 AI 驱动的图片标签识别等个性化能力，适用于个人图床、网站资源管理和轻量文件分发。 **[查看完整功能 →](https://cfbed.sanyue.de/guide/features.html)**
 
+https://github.com/user-attachments/assets/5de3b74c-7d55-44f0-834e-0728e4c3e873
 
-<details>
-    <summary>公告</summary>
+**架构一览**
 
+![CloudFlare ImgBed 技术架构：多端接入、多平台运行时、数据库兼容、统一存储渠道与可扩展 AI 能力](readme/architecture.apng)
 
+基于“同构内核 + 插件化底座”架构，单一核心引擎可无缝运行于 Pages、Workers 或 Docker 容器，并灵活挂载 KV、D1 与 SQLite 等多模态存储。系统通过独立适配器实现元数据与文件载荷的彻底解耦；依托智能通道路由提供动态负载均衡与故障无缝兜底；更内置 AI 原生工作流框架，将可配置的模型、Prompt 与结构化输出深度融入文件处理管线。
 
-## 置顶
+## 🤝 合作伙伴
 
-1. 部署使用出现问题，请先仔细查阅文档、常见问题解答以及已有issues。
-
-2. **注意**：本仓库为[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)项目的重制版，如果你觉得本项目不错，在支持本项目的同时，也请支持原项目。
-
-## V2.7.1+ Cloudflare Pages 构建输出目录变更
-
-> 自 v2.7.1 版本起，前端构建产物已迁移至 `frontend-dist` 目录。**Cloudflare Pages 用户**需要手动修改构建配置：
->
-> 1. 前往 Cloudflare Dashboard → 您的 Pages 项目 → `设置` → `构建`
-> 2. 编辑`构建配置`，将`构建输出目录`从 `/` 修改为 `/frontend-dist`
-> 3. 保存后重新部署
->
-> Docker 用户和 Workers 用户无需操作。
-
-## 2026.3.4 V2.6.2 重构 Docker 镜像的说明
-
-> 本次版本对 Docker 镜像进行了重构，涉及基础镜像、目录结构和数据库等方面的变更，带来了并发、内存管理等方面的优化。为确保数据安全，请务必**先备份数据再进行升级**。
->
-> ### 升级前：备份数据
->
-> 1. 备份数据：在管理面板下载备份文件（若原来使用本地R2存储需要全部下载重传）
-> 2. 备份data文件夹
->
-> ### 升级步骤
->
-> 1. 拉取最新镜像：
->
->    ```bash
->    docker compose pull
->    ```
->
-> 2. 使用新镜像启动容器：
->
->    ```bash
->    docker compose up -d
->    ```
->
-> 3. 检查容器是否正常运行：
->
->    ```bash
->    docker compose logs -f
->    ```
->
->    确认日志中无报错信息后即可正常使用。
->
-> 4. 恢复数据：在管理面板恢复全部数据（原来的R2文件需要重传）
-> 
-> ### 升级异常：回退版本
->
-> 如果升级后出现异常，可通过以下步骤回退：
->
-> 1. 停止容器：
->
->    ```bash
->    docker compose down
->    ```
->
-> 2. 回退到旧版本镜像：
->
->    ```bash
->    # amd64
->    docker pull marseventh/cloudflare-imgbed@sha256:896dc1b79883
->    # arm
->    docker pull marseventh/cloudflare-imgbed@sha256:b5442ccc198c
->    ```
->
->    同时修改 `docker-compose.yml` 中的 `image` 字段为对应旧版本 tag，然后重新启动：
->
->    ```bash
->    docker compose up -d
->    ```
->
-> **注意事项**：
-> - 升级前请务必确认备份完整，必要时备份一份data文件夹
-> - 如果你使用了自定义的 `docker-compose.yml` 配置（如自定义端口、环境变量等），升级时请注意保留
-> - 遇到问题请先查阅文档和已有 issues，或提交新的 issue
-
-## 2025.2.6  V2.0 版本升级注意事项
-
-> v2.0 版已发布，相较于 v1.0 版本进行了大量改动和优化，但 beta 版本可能存在潜在不稳定性，若您追求稳定，可选择暂缓更新。
->
-> 由于**构建命令发生了变化**，此次更新需要您**手动进行**，请按照以下步骤进行操作：
->
-> - 同步fork的仓库至最新版（若已自动同步可忽略）
->
-> - 前往 pages 管理页面，进入`设置`->`构建`，编辑`构建配置`，在`构建命令`处填写`npm install`
->
-> - 新版本所有设置项已**迁移至 管理端->系统设置 界面**，原则上无需再通过环境变量的方式进行设置，通过系统设置界面进行的设置将**覆盖掉**环境变量中的设置，但为了保证 **Telegram渠道的图片** 能够与旧版本相兼容，**若您之前设置了 Telegram 渠道相关的环境变量，请将其保留！**
->
-> - 确保上述设置完成无误后，前往 pages 管理页面，进入`部署`，对最后一次不成功的部署进行`重试操作`
-
-## 关于切换到 Telegram 渠道的通知
-
-
-> 由于telegraph图床被滥用，该项目上传渠道已切换至Telegram Channel，请**更新至最新版（更新方式见第3.1章最后一节）**，按照文档中的部署要求**设置`TG_BOT_TOKEN`和`TG_CHAT_ID`**，否则将无法正常使用上传功能。
->
-> 此外，目前**KV数据库为必须配置**，如果以前未配置请按照文档说明配置。
->
-> 出现问题，请先查看第5节常见问题Q&A部分。
-
-</details>
+<table width="100%">
+  <tr>
+    <td align="center" width="16%"><strong><a href="https://www.cloudflare.com/">Cloudflare</a></strong></td>
+    <td align="center" width="22%"><a href="https://www.cloudflare.com/"><img src="readme/partners/cloudflare-logo.png" alt="Cloudflare Logo" height="25"></a></td>
+    <td><sub>提供 CDN 加速及安全防护</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="16%"><strong><a href="https://edgeone.ai/?from=github">EdgeOne</a></strong></td>
+    <td align="center" width="22%"><a href="https://edgeone.ai/?from=github"><picture><source media="(prefers-color-scheme: dark)" srcset="readme/partners/edgeone-logo-dark.png"><img src="readme/partners/edgeone-logo.png" alt="EdgeOne Logo" height="25"></picture></a></td>
+    <td><sub>提供 CDN 加速及安全防护</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="16%"><strong><a href="https://www.packyapi.ai/register?aff=u0Ka">PackyCode</a></strong></td>
+    <td align="center" width="22%"><a href="https://www.packyapi.ai/register?aff=u0Ka"><picture><source media="(prefers-color-scheme: dark)" srcset="readme/partners/packycode-logo-dark.png"><img src="readme/partners/packycode-logo.png" alt="PackyCode Logo" height="25"></picture></a></td>
+    <td><sub>提供稳定、高性价比的顶级大模型 API 服务，一站搞定文案、图片和代码，通过本项目链接注册立享充值折扣与免费额度！</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="16%"><strong><a href="https://www.hncloud.com/activity/activity_2026summer.html?k=MarSeventh">华纳云</a></strong></td>
+    <td align="center" width="22%"><a href="https://www.hncloud.com/activity/activity_2026summer.html?k=MarSeventh"><picture><source media="(prefers-color-scheme: dark)" srcset="readme/partners/hncloud-logo-dark.png"><img src="readme/partners/hncloud-logo.png" alt="华纳云 Logo" height="25"></picture></a></td>
+    <td><sub>提供稳定、优质的云计算资源，通过本项目链接注册立享超值优惠！</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="16%"><strong><a href="https://www.svyun.com/recommend/AELZ0UeMz8K11Zg7pEXC">速维云</a></strong></td>
+    <td align="center" width="22%"><a href="https://www.svyun.com/recommend/AELZ0UeMz8K11Zg7pEXC"><picture><source media="(prefers-color-scheme: dark)" srcset="readme/partners/svyun-logo-dark.png"><img src="readme/partners/svyun-logo.png" alt="速维云 Logo" height="25"></picture></a></td>
+    <td><sub>提供稳定、优质的云计算资源，通过本项目链接注册立享超值优惠！</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="16%"><strong><a href="https://linux.do/t/topic/2578561">Linux DO</a></strong></td>
+    <td align="center" width="22%"><a href="https://linux.do/t/topic/2578561"><picture><source media="(prefers-color-scheme: dark)" srcset="readme/partners/linuxdo-logo.png"><img src="readme/partners/linuxdo-logo-light.png" alt="Linux DO Logo" height="25"></picture></a></td>
+    <td><sub>提供社区支持</sub></td>
+  </tr>
+</table>
 
 
 
 
-# 1. Introduction
+# 2. 🖥️ 在线演示
 
-免费文件托管解决方案，具有**上传**、**管理**、**读取**、**删除**等全链路功能，覆盖文件全生命周期，支持**鉴权**、**目录**、**图片审查**、**随机图**等各项特性（详见[功能文档](https://cfbed.sanyue.de/guide/features.html)）。
+**演示站点**：[CloudFlare ImgBed](https://cfbed.1314883.xyz/) · **访问密码**：`cfbed`
 
-![CloudFlare](readme/海报.png)
-
-# 2. [Document](https://cfbed.sanyue.de)
-
-提供详细的部署文档、功能文档、开发计划、更新日志、常见问题解答等，帮助您快速上手。
-
-[![更新日志](https://recent-update.cfbed.sanyue.de/cn)](https://cfbed.sanyue.de/guide/update-log.html)
-
-# 3. Demo
-
-**演示站点**：[CloudFlare ImgBed](https://cfbed.1314883.xyz/) 访问密码：`cfbed`
-
-![image-20250313204101984](readme/login.png)
-
-![image-20250313204101984](readme/upload.png)
+![CloudFlare ImgBed 项目海报](readme/海报.png)
 
 <details>
     <summary>其他页面效果展示</summary>
 
-![image-20250313204138886](readme/uploading.png)
-
-![image-20250313204308225](readme/dashboard.png)
-
-![image-20250314152355339](readme/customer-config.png)
-
-![status-page](readme/status-page.png)
-
-![public-gallery](readme/public-gallery.png)
-
-
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>登录页面</strong><br>
+      <img src="readme/login.png" alt="登录页面" width="100%">
+    </td>
+    <td align="center" width="50%">
+      <strong>上传进度</strong><br>
+      <img src="readme/uploading.png" alt="上传进度" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>文件管理</strong><br>
+      <img src="readme/dashboard.png" alt="文件管理" width="100%">
+    </td>
+    <td align="center" width="50%">
+      <strong>用户管理</strong><br>
+      <img src="readme/customer-config.png" alt="用户管理" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>状态页面</strong><br>
+      <img src="readme/status-page.png" alt="状态页面" width="100%">
+    </td>
+    <td align="center" width="50%">
+      <strong>公开画廊</strong><br>
+      <img src="readme/public-gallery.png" alt="公开画廊" width="100%">
+    </td>
+  </tr>
+</table>
 
 </details>
 
-# 4. Tips
+# 3. 📚 文档与更新
 
-- **前端开源**：参见[MarSeventh/Sanyue-ImgHub](https://github.com/MarSeventh/Sanyue-ImgHub)项目。
+## 📖 项目文档
 
-- **桌面端开源**：参见[MarSeventh/satellite](https://github.com/MarSeventh/satellite)项目。
+项目文档涵盖部署方式、存储渠道配置、功能使用、RESTful API、WebDAV、版本升级及常见问题等内容。无论是首次部署还是日常维护，都可以在文档中找到对应的操作说明。
 
-- **生态建设**：欢迎社区参与生态建设，欢迎提交 PR 或者 Issue，优质内容参见[官网生态建设页面](https://cfbed.sanyue.de/about/ecosystem.html)。
+**[查看完整文档 →](https://cfbed.sanyue.de)**
 
-- **赞助**：项目维护不易，喜欢本项目的话，可以作者大大一点小小的鼓励哦，您的每一份支持都是我前进的动力\~ 
+## 📝 更新日志
 
+了解项目的最新功能、问题修复、兼容性变更和升级注意事项。
 
-  <a href="https://afdian.com/a/marseventh"><img src="https://img.shields.io/badge/AFDIAN-946CE6?style=for-the-badge&logo=afdian&logoColor=white" height="36" alt="Afdian"></a>&nbsp;&nbsp;<a href="readme/weixin-reward.png" target="_blank"><img src="https://img.shields.io/badge/WeChat_Pay-07c160?style=for-the-badge&logo=wechat&logoColor=white" height="36" alt="WeChat Pay"></a>&nbsp;&nbsp;<a href="readme/alipay-reward.png" target="_blank"><img src="https://img.shields.io/badge/Alipay-1677FF?style=for-the-badge&logo=alipay&logoColor=white" height="36" alt="WeChat Pay"></a>
+[![更新日志](https://recent-update.cfbed.sanyue.de/cn)](https://cfbed.sanyue.de/guide/update-log.html)
 
-- **Sponsors**：感谢以下赞助者对本项目的支持！
+# 4. 🌱 项目生态
 
-  [![赞助者](https://afdian-sponsors.sanyue.de/image?columns=12)](https://afdian.com/a/marseventh)
-  
-- **Contributors**：感谢以下贡献者对本项目的无私贡献！
+欢迎前往 [CloudFlare ImgBed 生态](https://cfbed.sanyue.de/about/ecosystem.html)，探索社区提供的扩展、应用和教程，包括：
 
-  [![Contributors](https://contrib.rocks/image?repo=Marseventh/Cloudflare-ImgBed)](https://github.com/MarSeventh/CloudFlare-ImgBed/graphs/contributors)
+- **优秀的插件扩展**：浏览器扩展，Typecho、WordPress、Obsidian 等平台的集成插件，OpenList 驱动等
+- **丰富的周边应用**：桌面客户端、Bot 辅助工具等
+- **AI 智能体应用**：项目官方 Skill 及相关工具
+- **优质的教程内容**：内容创作者分享的优质视频和图文教程
 
-# 5. Star History
+您也可以向社区分享自己的作品，提交规范请参见[生态建设征集令](https://github.com/MarSeventh/CloudFlare-ImgBed/discussions/606)，期待您的参与！
 
-**如果觉得项目不错希望您能给个免费的star✨✨✨，非常感谢！**
+# 5. 💝 支持与赞助
 
-[![Star History Chart](https://api.star-history.com/svg?repos=MarSeventh/CloudFlare-ImgBed,MarSeventh/Sanyue-ImgHub&type=Date)](https://star-history.com/#MarSeventh/CloudFlare-ImgBed&MarSeventh/Sanyue-ImgHub&Date)
+## ☕ 支持项目
 
-# 6. Special Sponsors
+开源项目的维护需要持续投入时间和精力。如果 CloudFlare ImgBed 对您有所帮助，欢迎支持项目持续发展。
 
-- **[CloudFlare](https://www.cloudflare.com) & [EdgeOne](https://edgeone.ai/?from=github)**：提供CDN加速和安全保护服务
+<p align="center">
+  <a href="https://afdian.com/a/marseventh"><img src="https://img.shields.io/badge/爱发电-946CE6?style=for-the-badge&logo=afdian&logoColor=white" height="36" alt="通过爱发电支持"></a>
+  &nbsp;&nbsp;
+  <a href="readme/weixin-reward.png"><img src="https://img.shields.io/badge/微信赞赏-07C160?style=for-the-badge&logo=wechat&logoColor=white" height="36" alt="通过微信赞赏支持"></a>
+</p>
 
-  <a href="https://www.cloudflare.com"><img src="readme/cloudflare-logo.png" alt="Cloudflare Logo" height="25"></a> <a href="https://edgeone.ai/?from=github"><img src="readme/edgeone-logo.png" alt="Tencent Logo" height="25"></a>
+## 💖 赞助者
 
-- **[速维云](https://www.svyun.com/recommend/AELZ0UeMz8K11Zg7pEXC)**：提供云计算服务资源支持
+感谢每一位赞助者对本项目的支持！您的支持帮助项目持续维护，也为 CloudFlare ImgBed 的长期改进提供动力。
 
-- **[Linux DO](https://linux.do/)**：新的理想型社区
+[![赞助者](https://afdian-sponsors.sanyue.de/image?columns=12)](https://afdian.com/a/marseventh)
+
+# 6. 👥 项目社区
+
+## 🧑‍💻 贡献者
+
+感谢所有为项目贡献代码、文档、创意和反馈的开发者！
+
+参与前请阅读[贡献指南](CONTRIBUTING.md)（英文），了解仓库分工、PR 目标分支、代码约定和验证要求。
+
+[![贡献者](https://contrib.rocks/image?repo=Marseventh/Cloudflare-ImgBed)](https://github.com/MarSeventh/CloudFlare-ImgBed/graphs/contributors)
+
+## ⭐ Star 趋势
+
+**如果这个项目对您有所帮助，欢迎点亮一个 Star ⭐，感谢您的支持！**
+
+<a href="https://github.com/MarSeventh/CloudFlare-ImgBed">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=marseventh%2Fcloudflare-imgbed%2Cmarseventh/sanyue-imghub&amp;type=Date&amp;theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=marseventh%2Fcloudflare-imgbed%2Cmarseventh/sanyue-imghub&amp;type=Date" />
+   <img alt="Star-History" src="https://api.star-history.com/svg?repos=marseventh%2Fcloudflare-imgbed%2Cmarseventh/sanyue-imghub&amp;type=Date" />
+ </picture>
+</a>
+
+# 7. ⚖️ 开源协议与相关项目
+
+## 📄 开源协议
+
+> [!IMPORTANT]
+> 本项目基于 [MIT License](LICENSE) 开源。您可以自由使用、修改和分发本项目，但须在软件的所有副本或重要部分中保留原始版权及许可声明。
+
+## 🔗 相关开源项目
+
+- **Web 前端**：[MarSeventh/Sanyue-ImgHub](https://github.com/MarSeventh/Sanyue-ImgHub)
+- **桌面客户端**：[MarSeventh/satellite](https://github.com/MarSeventh/satellite)
+- **上游项目**：[cf-pages/Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)
+
+CloudFlare ImgBed 由 Telegraph-Image 发展而来，感谢原项目作者及所有贡献者。
